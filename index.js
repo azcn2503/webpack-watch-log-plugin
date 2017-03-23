@@ -2,9 +2,18 @@ var os = require("os");
 
 var clockEmoji = ["🕐", "🕑", "🕒", "🕓", "🕔", "🕕", "🕖", "🕗", "🕘", "🕙", "🕚", "🕛"];
 
+var getClockEmoji = function(n) {
+  n = n || 0;
+  return clockEmoji[n % clockEmoji.length];
+}
+
+var DEFAULT_HEARTBEAT = function(count, compileTime) {
+  return "Waiting for changes... " + count;
+};
+
 function WebpackWatchLogPlugin(options) {
   options = options || {};
-  options.heartbeat = options.heartbeat || true;
+  options.heartbeat = options.heartbeat || DEFAULT_HEARTBEAT;
   return function() {
     var self = this;
     this.watching = false;
@@ -32,7 +41,7 @@ function WebpackWatchLogPlugin(options) {
         }
         if (self.watching && options.heartbeat) {
           self.timer = setInterval(function() {
-            sameLine(clockEmoji[self.count % clockEmoji.length] + "  Waiting for changes... " + self.count);
+            sameLine(getClockEmoji(self.count) + "  " + options.heartbeat(self.count, compileTime));
             self.count += 1;
           }, 1000);
         }
