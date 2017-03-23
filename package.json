@@ -1,10 +1,15 @@
 {
   "name": "webpack-watch-log-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Use magical emoji powers to bring clarity to your Webpack build output",
   "main": "index.js",
   "keywords": [
-    "webpack", "watch", "log", "plugin", "emoji", "timer"
+    "webpack",
+    "watch",
+    "log",
+    "plugin",
+    "emoji",
+    "timer"
   ],
   "author": {
     "name": "Aaron Cunnington",
