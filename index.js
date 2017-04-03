@@ -25,6 +25,14 @@ function WebpackWatchLogPlugin(options) {
         clearInterval(self.timer);
         self.count = 0;
       }
+      var changedTimes = watching.compiler.watchFileSystem.watcher.mtimes;
+      var changedFiles = Object.keys(changedTimes);
+      for (var i in changedFiles) {
+        changedFiles[i] = "     " + changedFiles[i];
+      }
+      if (changedFiles.length) {
+        newLine("✨  New build triggered, files changed:\n" + changedFiles.join("\n"));
+      }
       newLine("✨  Begin compile at " + new Date());
       callback();
     });
